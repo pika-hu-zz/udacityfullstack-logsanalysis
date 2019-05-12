@@ -24,7 +24,11 @@ requestAuthors = (
 )
 
 # Days in which more than 1% of requests lead to errors
-
+requestErrorDays = (
+    "select day, errorpercent "
+    "from errorpercent "
+    "where errorpercent > 1;"
+)
 
 # Database query function
 # Opens connection, executes query, closes connection.
@@ -40,15 +44,21 @@ def get_queryResults(query_request):
 def printReport():
     resultsArticles = get_queryResults(requestArticles)
     resultsAuthors = get_queryResults(requestAuthors)
+    resultsErrorDays = get_queryResults(requestErrorDays)
 
     print("Top 3 most popular articles of all time:\n")
     for title, views in resultsArticles:
-        print("{:<35}{:^3}{:>10} views".format(title, "-", views))
+        print("{:<35}{:^3}{:>15} views".format(title, "-", views))
     print("\n")
 
     print("Most popular authors:\n")
     for authors, views in resultsAuthors:
-        print("{:<35}{:^3}{:>10} views".format(authors, "-", views))
+        print("{:<35}{:^3}{:>15} views".format(authors, "-", views))
+    print("\n")
+    
+    print("Days with more than 1 percent error rate in requests:\n")
+    for day, errorpercent in resultsErrorDays:
+        print("{:<35}{:^3}{:>15} percent".format(str(day), "-", round(errorpercent, 5)))
     print("\n")
 
 # Main function
