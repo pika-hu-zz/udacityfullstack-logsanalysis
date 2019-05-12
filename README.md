@@ -26,7 +26,7 @@ This is a reporting tool that extracts summaries from a large database containin
 
 ## Setup
 
-> Assuming you have Python3, Vagrant, and VitualBox already installed
+> Assuming you have Python3, PostgreSQL, Vagrant, and VitualBox already installed
 
 1. Clone this repository
 2. Download the *newsdata.sql* from Udacity and move both *newsdata.sql* and *generate-report.py* (from cloned repository) into the vagrant directory within your VM
