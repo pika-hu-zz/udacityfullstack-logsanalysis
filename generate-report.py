@@ -32,6 +32,8 @@ requestErrorDays = (
 
 # Database query function
 # Opens connection, executes query, closes connection.
+
+
 def get_queryResults(query_request):
     db = psycopg2.connect(database="news")
     c = db.cursor()
@@ -41,6 +43,8 @@ def get_queryResults(query_request):
     return results
 
 # Print report
+
+
 def printReport():
     resultsArticles = get_queryResults(requestArticles)
     resultsAuthors = get_queryResults(requestAuthors)
@@ -55,12 +59,15 @@ def printReport():
     for authors, views in resultsAuthors:
         print("{:<35}{:^3}{:>15} views".format(authors, "-", views))
     print("\n")
-    
+
     print("Days with more than 1 percent error rate in requests:\n")
     for day, errorpercent in resultsErrorDays:
-        print("{:<35}{:^3}{:>15} percent".format(str(day), "-", round(errorpercent, 5)))
+        print("{:<35}{:^3}{:>15} percent".format(
+            str(day), "-", round(errorpercent, 5)))
     print("\n")
 
 # Main function
+
+
 if __name__ == '__main__':
     printReport()
